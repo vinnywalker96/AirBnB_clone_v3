@@ -67,6 +67,61 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+    # Test cases for DBStorage
+def test_db_storage_get():
+    storage = DBStorage()
+    obj = SomeClass(id='abc123', name='Object 1')
+    storage.add(obj)
+
+    retrieved_obj = storage.get(SomeClass, 'abc123')
+    assert retrieved_obj == obj
+
+    non_existent_obj = storage.get(SomeClass, 'xyz789')
+    assert non_existent_obj is None
+
+def test_db_storage_count():
+    storage = DBStorage()
+    obj1 = SomeClass(id='abc123', name='Object 1')
+    obj2 = SomeClass(id='def456', name='Object 2')
+    storage.add(obj1)
+    storage.add(obj2)
+
+    total_count = storage.count()
+    assert total_count == 2
+
+    class_count = storage.count(SomeClass)
+    assert class_count == 2
+
+    non_existent_class_count = storage.count(AnotherClass)
+    assert non_existent_class_count == 0
+
+# Test cases for FileStorage
+def test_file_storage_get():
+    storage = FileStorage()
+    obj = SomeClass(id='abc123', name='Object 1')
+    storage.add(obj)
+
+    retrieved_obj = storage.get(SomeClass, 'abc123')
+    assert retrieved_obj == obj
+
+    non_existent_obj = storage.get(SomeClass, 'xyz789')
+    assert non_existent_obj is None
+
+def test_file_storage_count():
+    storage = FileStorage()
+    obj1 = SomeClass(id='abc123', name='Object 1')
+    obj2 = SomeClass(id='def456', name='Object 2')
+    storage.add(obj1)
+    storage.add(obj2)
+
+    total_count = storage.count()
+    assert total_count == 2
+
+    class_count = storage.count(SomeClass)
+    assert class_count == 2
+
+    non_existent_class_count = storage.count
+
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
