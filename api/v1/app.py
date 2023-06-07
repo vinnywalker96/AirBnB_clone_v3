@@ -13,7 +13,7 @@ def teardown_appcontext(exeption):
 
 if __name__ == "__main__":
     # Get host and port from environment variables or use default values
-    host = os.environ.get("HBNB_API_HOST", "0.0.0.0")
-    port = int(os.environ.get("HBNB_API_PORT", 5000))
+    host = os.environ.get("HBNB_API_HOST")
+    port = os.environ.get("HBNB_API_PORT")
 
     app.run(host=host, port=port, threaded=True)
