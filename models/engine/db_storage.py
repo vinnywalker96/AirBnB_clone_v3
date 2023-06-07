@@ -61,21 +61,16 @@ class DBStorage:
 
     def get(self, cls, id):
         """Retrieves an object"""
-        if cls not in self._tables:
-            return None
-        table = self.tables[cls]
-        return table.get(id)
+        return self.__session.query(cls).get(id)
 
     def count(self, cls=None):
-        if cls:
-            if cls not in self._tables:
-                return 0
-            return len(self._tables[cls])
+        """Count number of instances"""
+        if cls is not None:
+            return self.__session.query(cls).count()
         else:
-            count = 0
-            for table in self._tables.value():
-                count += len(table)
-            return count
+            state = self.__session.query(State).count()
+            city = self.__session.query(City).count()
+            return state + city
 
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
