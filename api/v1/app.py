@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""import libraries"""
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
@@ -9,6 +10,7 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown_appcontext(exeption):
+    """close database session"""
     storage.close()
 
 if __name__ == "__main__":
