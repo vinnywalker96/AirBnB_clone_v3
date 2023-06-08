@@ -14,7 +14,7 @@ from models import storage
 @app_views.route('/status', methods=['GET'])
 def status():
     """ get status"""
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats', methods=['GET'])
