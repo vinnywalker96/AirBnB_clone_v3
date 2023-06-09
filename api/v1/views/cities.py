@@ -78,4 +78,4 @@ def put_city(city_id):
         if key not in ignore_keys:
             setattr(city, key, value)
     city.save()
-    return make_response(jsonif(city.to_dict()), 200)
+    return make_response(jsonify(city.to_dict()), 200)
