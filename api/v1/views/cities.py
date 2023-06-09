@@ -57,11 +57,10 @@ def post_city(state_id):
     if 'name' not in data:
         abort(400, 'Missing name')
     
-    for filter in cities:
-        if state_id == filter['id']:
-            city = City(**data)
-            storage.new(city)
-
+    city = City()
+    city.name = data['name']
+    city.state_id = state_id
+    storage.new(city)
     storage.save()
     return make_response(jsonify({}), 200)
 
