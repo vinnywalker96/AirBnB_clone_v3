@@ -22,10 +22,10 @@ def get_amenity():
 def get_amenities(amenity_id):
     """Get all amenities"""
     amenities = storage.get(Amenity, amenity_id)
-    if amenities is None:
-        abort(404)
     amenity_list = [amenity.to_dict()
                     for amenity in amenities.value()]
+    if amenities is None:
+        abort(404)
     return jsonify(amenity_list)
 
 
