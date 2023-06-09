@@ -41,3 +41,22 @@ def delete_city_by_id(city_id):
     storage.new(city)
     storage.save()
     return make_response(jsonify({}), 200)
+
+
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
+                 strict_slashes=False)
+def post_city(state_id):
+    """Post a new city"""
+    state = storage.get(State, state_id)
+    if state is None:
+        abort(404)
+    data = request.get_json()
+    if data is None:
+        abort(400, 'Not s JSON')
+    if 'name' not in data:
+        abort(400, 'Missing name')
+
+    city = City(**data)
+    city.save()
+    return make_response(jsonify(city.to_dict()), 200)
+
