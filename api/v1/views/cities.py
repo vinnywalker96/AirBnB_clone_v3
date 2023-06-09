@@ -56,11 +56,9 @@ def post_city(state_id):
         abort(400, 'Not s JSON')
     if 'name' not in data:
         abort(400, 'Missing name')
-    
     city = City()
     city.name = data['name']
     city.state_id = state_id
     storage.new(city)
     storage.save()
     return make_response(jsonify({}), 201)
-
