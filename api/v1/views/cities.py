@@ -61,4 +61,4 @@ def post_city(state_id):
     city.state_id = state_id
     storage.new(city)
     storage.save()
-    return make_response(jsonify({}), 201)
+    return make_response(jsonify(city.to_dict()), 201)
