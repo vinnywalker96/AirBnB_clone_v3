@@ -48,6 +48,7 @@ def delete_city_by_id(city_id):
 def post_city(state_id):
     """Post a new city"""
     state = storage.get(State, state_id)
+    cities = [city.to_dict() for city in state.cities]
     if state is None:
         abort(404)
     data = request.get_json()
@@ -55,8 +56,12 @@ def post_city(state_id):
         abort(400, 'Not s JSON')
     if 'name' not in data:
         abort(400, 'Missing name')
+    
+    for filter in cities:
+        if state_id == filter['id']:
+            city = City(**data)
+            storage.new(city)
 
-    city = City(**data)
-    city.save()
-    return make_response(jsonify(city.to_dict()), 200)
+    storage.save()
+    return make_response(jsonify({}), 200)
 
