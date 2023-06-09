@@ -48,7 +48,6 @@ def delete_city_by_id(city_id):
 def post_city(state_id):
     """Post a new city"""
     state = storage.get(State, state_id)
-    cities = [city.to_dict() for city in state.cities]
     if state is None:
         abort(404)
     data = request.get_json()
