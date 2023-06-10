@@ -67,7 +67,7 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
-    # Test cases for DBStorage
+
 def test_db_storage_get():
     storage = DBStorage()
     obj = SomeClass(id='abc123', name='Object 1')
@@ -78,6 +78,7 @@ def test_db_storage_get():
 
     non_existent_obj = storage.get(SomeClass, 'xyz789')
     assert non_existent_obj is None
+
 
 def test_db_storage_count():
     storage = DBStorage()
@@ -95,7 +96,7 @@ def test_db_storage_count():
     non_existent_class_count = storage.count(AnotherClass)
     assert non_existent_class_count == 0
 
-# Test cases for FileStorage
+
 def test_file_storage_get():
     storage = FileStorage()
     obj = SomeClass(id='abc123', name='Object 1')
@@ -106,6 +107,7 @@ def test_file_storage_get():
 
     non_existent_obj = storage.get(SomeClass, 'xyz789')
     assert non_existent_obj is None
+
 
 def test_file_storage_count():
     storage = FileStorage()
