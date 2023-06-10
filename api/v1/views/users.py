@@ -16,3 +16,13 @@ def get_users():
     users = storage.all(User)
     user_list = [user.to_dict() for user in users.value()]
     return jsonify(user_list)
+
+
+@app_views.route('/users/<user_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_user_by_id(user_id):
+    """Get all Users"""
+    users = storage.get(User, user_id)
+    if users is None:
+        abort(404)
+    return jsonify(users.to_dict())
