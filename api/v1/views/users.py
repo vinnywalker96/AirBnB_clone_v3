@@ -9,7 +9,7 @@ from models import storage
 from models.user import User
 
 
-@app_view.route('/users', methods=['GET'],
+@app_views.route('/users', methods=['GET'],
                 strict_slashes=False)
 def get_users():
     """Get all Users"""
