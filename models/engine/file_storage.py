@@ -62,7 +62,6 @@ class FileStorage:
             count = len(self.__objects)
         return count
 
-
     def reload(self):
         """deserializes the JSON file to __objects"""
         try:
