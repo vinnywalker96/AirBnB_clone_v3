@@ -14,7 +14,7 @@ from models.user import User
 def get_users():
     """Get all Users"""
     users = storage.all(User)
-    user_list = [user.to_dict() for user in users.value()]
+    user_list = [user.to_dict() for user in users.values()]
     return jsonify(user_list)
 
 
@@ -26,3 +26,16 @@ def get_user_by_id(user_id):
     if users is None:
         abort(404)
     return jsonify(users.to_dict())
+
+
+@app_views.route('/users/<user_id>', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_user(user_id):
+    """Delete Users"""
+    user = storage.get(User, user_id)
+    if user is None:
+        abort(404)
+    storage.delete(user)
+    storage.save()
+    return make_response(jsonify({}), 200)
+
