@@ -11,6 +11,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.user import User
 
+
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_place(city_id):
