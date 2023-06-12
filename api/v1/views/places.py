@@ -9,14 +9,14 @@ from models.city import City
 from models.state import State
 from models.place import Place
 from models.amenity import Amenity
-
+from models.user import User
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_place(city_id):
     """Get all Places"""
     city = storage.get(City, city_id)
-    if city is None:
+    if not city:
         abort(404)
     places = [place.to_dict() for place in city.places]
     return jsonify(places)
