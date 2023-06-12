@@ -18,8 +18,7 @@ def get_place(city_id):
     """Get all Places"""
     city = storage.get(City, city_id)
     if not city:
-        abort(404)
-    
+        abort(404)    
     return jsonify(city.to_dict())
 
 
