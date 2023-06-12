@@ -18,8 +18,9 @@ def get_place(city_id):
     """Get all Places"""
     city = storage.get(City, city_id)
     if not city:
-        abort(404)    
-    return jsonify(city.to_dict())
+        abort(404)
+    places = city.places
+    return jsonify([place.to_dict() for place in places])
 
 
 @app_views.route('/places/<place_id>', methods=['GET'],
@@ -61,8 +62,7 @@ def create_place(city_id):
         abort(404)
     if 'name' not in data:
         abort(400, 'Missing name')
-    place = Place()
-    place.name = data['name']
+    place = Place(**data)
     place.city_id = city_id
     storage.new(place)
     storage.save()
@@ -89,5 +89,5 @@ def update_place(place_id):
     for key, value in data.items():
         if key not in ignore_keys:
             setattr(place, key, value)
-    place.save()
+    storage.save()
     return make_response(jsonify(place.to_dict()), 200)
