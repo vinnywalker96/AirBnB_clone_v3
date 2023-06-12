@@ -10,6 +10,7 @@ from models.state import State
 from models.place import Place
 from models.amenity import Amenity
 
+
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_place(city_id):
