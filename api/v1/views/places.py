@@ -12,15 +12,15 @@ from models.amenity import Amenity
 from models.user import User
 
 
-@app_views.route('/cities/<path:city_id>/places', methods=['GET'],
+@app_views.route('/cities/<city_id>', methods=['GET'],
                  strict_slashes=False)
 def get_place(city_id):
     """Get all Places"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
-    places = [place.to_dict() for place in city.places]
-    return jsonify(places)
+    
+    return jsonify(city.to_dict())
 
 
 @app_views.route('/places/<place_id>', methods=['GET'],
